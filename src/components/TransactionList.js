@@ -8,6 +8,7 @@ const TransactionList = () => {
     return (
         <>
             <h3>History</h3>
+            {transactions.length === 0 && <p>No Expenses</p>}
             <ul className="list">
                 {transactions.map((transaction) => (
                     <Transaction

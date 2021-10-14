@@ -4,8 +4,16 @@ import { GlobalContext } from '../context/GlobalState';
 const Balance = () => {
     const {transactions} = useContext(GlobalContext);
 
-    const amounts = transactions.map((transaction) => transaction.amount);
-    const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
+    const incomeType = transactions.filter((transaction) => transaction.type === 'inc');
+    const expenseType = transactions.filter((transaction) => transaction.type === 'exp');
+
+    const incomeAmounts = incomeType.map((transaction) => transaction.amount);
+    const expenseAmounts = expenseType.map((transaction) => transaction.amount);
+
+    const income = incomeAmounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
+    const expense = expenseAmounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
+
+    const total = income - expense;
 
     return (
         <>
